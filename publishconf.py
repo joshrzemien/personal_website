@@ -18,4 +18,4 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-GOOGLE_ANALYTICS = "G-7KHTZ2LRY7"
+GOOGLE_GLOBAL_SITE_TAG = "G-7KHTZ2LRY7"
