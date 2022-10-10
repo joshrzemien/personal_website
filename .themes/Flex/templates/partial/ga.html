@@ -1,11 +1,10 @@
 {% if GOOGLE_ANALYTICS %}
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
-<script>
+<script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS }}"></script>
+<script type="text/javascript">
   window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      
-        gtag('config', '{{ GOOGLE_ANALYTICS }}');
-        </script>
+      gtag('config', '{{ GOOGLE_ANALYTICS }}');
+</script>
 {% endif %}
