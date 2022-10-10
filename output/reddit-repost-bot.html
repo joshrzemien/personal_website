@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://joshrzemien.com/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://joshrzemien.com/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://joshrzemien.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://joshrzemien.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://joshrzemien.com/theme/font-awesome/css/solid.css">
+
+
+
+
+  <link href="https://joshrzemien.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Josh Rzemien Atom">
+
+
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-7KHTZ2LRY7', 'auto');
+  ga('send', 'pageview');
+</script>
+
+ 
+
+<meta name="author" content="Josh Rzemien" />
+<meta name="description" content="The Idea If you are like me, you occasionally browse Reddit&#39;s /r/videos and come across a video that you swear you have seen posted on the subreddit dozens of times. You may then ask yourself, why would you post this? Well, I can&#39;t answer that. We can, however, determine …" />
+<meta name="keywords" content="praw, python, psaw, reddit, regex">
+
+
+  <meta property="og:site_name" content="Josh Rzemien"/>
+  <meta property="og:title" content="Using PRAW and PSAW to gather data about Reddit reposts and automate complaining about them"/>
+  <meta property="og:description" content="The Idea If you are like me, you occasionally browse Reddit&#39;s /r/videos and come across a video that you swear you have seen posted on the subreddit dozens of times. You may then ask yourself, why would you post this? Well, I can&#39;t answer that. We can, however, determine …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://joshrzemien.com/reddit-repost-bot.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2022-05-03 08:00:00-04:00"/>
+  <meta property="article:modified_time" content="2022-05-03 08:00:00-04:00"/>
+  <meta property="article:author" content="https://joshrzemien.com/author/josh-rzemien.html">
+  <meta property="article:section" content="Projects"/>
+  <meta property="article:tag" content="praw"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="article:tag" content="psaw"/>
+  <meta property="article:tag" content="reddit"/>
+  <meta property="article:tag" content="regex"/>
+  <meta property="og:image" content="">
+
+  <title>Josh Rzemien &ndash; Using PRAW and PSAW to gather data about Reddit reposts and automate complaining about them</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://joshrzemien.com/">
+      <img src="https://joshrzemien.com/theme/img/profile.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://joshrzemien.com/"></a>
+    </h1>
+
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://joshrzemien.com/pages/about.html#about">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="https://joshrzemien.com/pages/projects.html#projects">
+                Projects
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="/pdf/Josh_Rzemien_Resume.pdf" >Resume</a>
+          </li>
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/joshuarzemien/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/joshrzemien"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="reddit-repost-bot">Using PRAW and PSAW to gather data about Reddit reposts and automate complaining about them</h1>
+    <p>
+      Posted on Tue 03 May 2022 in <a href="https://joshrzemien.com/category/projects.html">Projects</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>The Idea</h2>
+<p>If you are like me, you occasionally browse Reddit's /r/videos and come across a video that you swear you have seen posted on the subreddit dozens of times. You may then ask yourself, why would you post this? Well, I can't answer that. We can, however, determine how many times it has been posted and inform the user about their egregious error.</p>
+<h2>The Tools</h2>
+<p>For this project, I used the following tools:
+- pandas, to interact with the data
+- python reddit api wrapper, to monitor submissions in real time and post replies
+- pushshift.io api wrapper, to pull historical data about subreddit submissions from pushshift.io
+- regex, to isolate the youtube video id from the submission url (many of these were god awful abominations)</p>
+<h2>The Code</h2>
+<p>Start with my imports and connecting to the API. Set search criteria. For this, I set the karma limit to 50 in order to limit the amount of data, bad posts, spam, etc. Realistically, a decent amount of reposts probably do have under 50 karma, but for now I will keep the limit. The final line here takes quite a while and returned over 170k results. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">psaw</span> <span class="kn">import</span> <span class="n">PushshiftAPI</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">PushshiftAPI</span><span class="p">()</span>
+<span class="n">api_request_generator</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search_submissions</span><span class="p">(</span><span class="n">subreddit</span><span class="o">=</span><span class="s1">&#39;videos&#39;</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="s2">&quot;&gt;50&quot;</span><span class="p">)</span>
+<span class="n">submissions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">submission</span><span class="o">.</span><span class="n">d_</span> <span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">api_request_generator</span><span class="p">])</span>
+</code></pre></div>
+
+<p>The vast majority of posts to the subreddit are youtube links, so for now I am just focusing on those and ignoring all other urls. Youtube video urls are <em>supposed</em> to be simple. For a variety of reasons, the url text that the average redditor ends up copy and pasting into the link field on a reddit submission has tons of garbage in it. Because I am looking for reposts, these differences could potentially cause fewer reposts to appear in the results. If I can filter out all unwanted parts of the url, I will be left with the id. Regex is a great tool for this. I was able to find a semi complete solution for this on Stack Overflow, but it did require a few tweaks to support all of the potential variants that I encountered in the data. I used https://regex101.com/ to verify that all of my urls were being processed correctly.</p>
+<div class="highlight"><pre><span></span><code><span class="n">regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&amp;][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&amp;\/\#].*)?$&#39;</span>
+
+<span class="n">repl</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">submissions</span><span class="p">[</span><span class="s1">&#39;youtube_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">submissions</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">repl</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The Reddit API has a ton of fields that I am not interested in, so I selected only the useful data. </p>
+<div class="highlight"><pre><span></span><code><span class="n">data</span> <span class="o">=</span> <span class="n">submissions</span><span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;author&#39;</span><span class="p">,</span><span class="s1">&#39;full_link&#39;</span><span class="p">,</span><span class="s1">&#39;url&#39;</span><span class="p">,</span><span class="s1">&#39;youtube_id&#39;</span><span class="p">,</span><span class="s1">&#39;created_utc&#39;</span><span class="p">,</span><span class="s1">&#39;num_comments&#39;</span><span class="p">,</span><span class="s1">&#39;num_crossposts&#39;</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Finally, I added a column for the number of times each youtube id is found in the data and convert the unix timestamp to a more readable format. That is all I needed for now, so I saved it to a csv.</p>
+<div class="highlight"><pre><span></span><code><span class="n">data</span><span class="p">[</span><span class="s1">&#39;num_reposts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;youtube_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;youtube_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;created_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;created_utc&#39;</span><span class="p">],</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now that I have the historical data, I can reference it whenever someone submits something to the subreddit and determine if it is a repost. This is pretty simple in PRAW. Start with the imports and starting PRAW and pointing it to the correct subreddit.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">praw</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span>
+    <span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;clientid&quot;</span><span class="p">,</span>
+    <span class="n">client_secret</span><span class="o">=</span><span class="s2">&quot;secret&quot;</span><span class="p">,</span>
+    <span class="n">user_agent</span><span class="o">=</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span>
+    <span class="n">username</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
+    <span class="n">password</span><span class="o">=</span><span class="s2">&quot;password&quot;</span>
+<span class="p">)</span>
+
+<span class="n">subreddit</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">subreddit</span><span class="p">(</span><span class="s1">&#39;videos&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>I want to be sure that I don't enable replies until I am ready so that I don't accidentally post a bunch of spam comments and get banned. Next I want to load a csv that contains all of the post ids that the bot has already processed. This is another spam prevention method. Next, I read the data from the previous step into a dataframe and define the same regex. </p>
+<div class="highlight"><pre><span></span><code><span class="n">replies_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;processed.csv&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">processed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+            <span class="n">processed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">)</span>
+<span class="n">regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&amp;][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&amp;\/\#].*)?$&#39;</span>
+</code></pre></div>
+
+<p>This is the main part of the bot. Praw will iterate through current submissions and monitor for future submissions. If the submission has not already been processed, I apply the regex to the submitted url to get the youtube_id. Then I look up the youtube_id in the original dataset, returning only the value of num_reposts. Regardless of that result, the post id is added to the csv. If the number of reposts is greater than 2, I print a small summary of the post and post a reply to the submission. </p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">submissions</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">submission</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">processed</span><span class="p">:</span>
+        <span class="n">submission_youtube_id</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1&#39;</span><span class="p">,</span><span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">num_reposts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;num_reposts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;new_url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">submission_youtube_id</span><span class="p">)]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">num_reposts</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;processed.csv&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">num_reposts</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;repost alert&#39;</span><span class="p">,</span><span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">submission_youtube_id</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">permalink</span><span class="p">,</span> <span class="n">num_reposts</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">replies_enabled</span><span class="p">:</span>
+                <span class="n">submission</span><span class="o">.</span><span class="n">reply</span><span class="p">(</span><span class="s1">&#39;Seen this video before? This video has been submitted to /r/videos at least &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num_reposts</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; times.&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>The Outcome</h2>
+<p>I spun up an ubuntu VM on my home server and deployed the bot. Honestly, I fully expect it to get banned from the subreddit after a few comments. This was a small/quick/fun project that gave me a chance to check out the basic features of PRAW/PSAW. They were both extremely easy to get started with. I will definitely be returning to these tools in future projects. I am also really happy with how well the regex worked on such a large dataset. The amount of data that the reddit API gives you opens up a lot of possibilites for these types of bots. You could easily adapt this bot into a karma farming repost bot. I think there are also quite a few ways that I could reduce the likelihood that my account gets banned, but it wouldn't be worth it at this point.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://joshrzemien.com/tag/praw.html">praw</a>
+      <a href="https://joshrzemien.com/tag/python.html">python</a>
+      <a href="https://joshrzemien.com/tag/psaw.html">psaw</a>
+      <a href="https://joshrzemien.com/tag/reddit.html">reddit</a>
+      <a href="https://joshrzemien.com/tag/regex.html">regex</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2022 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Josh Rzemien ",
+  "url" : "https://joshrzemien.com",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>
