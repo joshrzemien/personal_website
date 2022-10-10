@@ -9,6 +9,7 @@ PATH = 'content'
 TIMEZONE = 'America/Detroit'
 
 DEFAULT_LANG = 'en'
+THEME = ".themes/Flex"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
